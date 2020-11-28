@@ -96,8 +96,26 @@ public class MainActivity extends Activity {
         Toast toast = Toast.makeText(this, "Has pulsado la casilla " + casillaTocada, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0,0);
         toast.show();*/
+        // Pulsamos una casilla y la dibuja con un círculo
+        if (!partida.comprobarCasilla(casillaTocada)){
+            // Con return saldremos del método y no se ejecutarán las siguiente líneas del método.
+            return;
+        }
+        marcarCasilla(casillaTocada);
+            // Damos turno al siguiente jugador
+        partida.turno();
+        // El programa escoge la casilla donde va a dibujar y dibuja
+        casillaTocada = partida.ia();
+
+        // Comprobamos que la casilla no sea la misma que hemos tocado nosotros. En caso que sea la misma, que seleccione otra.
+        /************************** A MEJORAR************************************/
+        while(!partida.comprobarCasilla(casillaTocada)){
+            casillaTocada = partida.ia();
+        }
 
         marcarCasilla(casillaTocada);
+            // Volvemos a dar turno al otro jugador
+        partida.turno();
     }
 
     private void marcarCasilla(int casillaNum){
@@ -110,6 +128,9 @@ public class MainActivity extends Activity {
         }else {
             imagen.setImageResource(R.drawable.aspa);
         }
+
+
+
     }
 
 }
