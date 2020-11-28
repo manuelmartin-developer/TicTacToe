@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/rosa"/>
+            <corners android:radius="@dimen/radio_boton"/>
+        </shape>
+    </item>
+
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/azul_muy_oscuro"/>
+            <corners android:radius="@dimen/radio_boton"/>
+        </shape>
+    </item>
+
+    // Estado reposo siempre tiene que estar en último lugar
+
+    <item>
+        <shape>
+            <gradient android:startColor="@color/blanco"
+                android:endColor="@color/azul_medio"
+                android:angle="270"/>
+            <corners android:radius="@dimen/radio_boton"/>
+        </shape>
+    </item>
+</selector>
