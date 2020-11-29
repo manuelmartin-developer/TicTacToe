@@ -24,7 +24,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         // Iniciamos el array casillas que identifica cada casilla y la almacena en el array
          casilla = new int[9];
 
@@ -39,7 +38,6 @@ public class MainActivity extends Activity {
          casilla[8] = R.id.c3;
 
     }
-
     // Método aJugar que se inicia al pulsar en cualquier botón
 
     public void aJugar(View view){
@@ -56,16 +54,17 @@ public class MainActivity extends Activity {
         }
 
         // Identificamos la dificultad
-        RadioGroup configDificultad = findViewById(R.id.configDificultad);
-        int idDificultad = configDificultad.getCheckedRadioButtonId();
+        RadioGroup configDifi = findViewById(R.id.configDificultad);
+        int idDificultad = configDifi.getCheckedRadioButtonId();
 
-        idDificultad=0;
-
-        if (idDificultad == R.id.normal){
+        if (idDificultad == R.id.facil){
+            idDificultad=0;
+        }else if (idDificultad == R.id.normal){
             idDificultad=1;
         }else if (idDificultad == R.id.imposible){
             idDificultad=2;
         }
+
         // Inhabilitamos los botones para no tocarlos durante la partida
             // Instanciamos la clase partida
         partida = new Partida (idDificultad);
@@ -74,8 +73,7 @@ public class MainActivity extends Activity {
 
         boton.setEnabled(false);
         boton2.setEnabled(false);
-        configDificultad.setAlpha(0);
-
+        configDifi.setAlpha(0);
     }
 
     public void toque(View view){
@@ -102,20 +100,33 @@ public class MainActivity extends Activity {
             return;
         }
         marcarCasilla(casillaTocada);
-            // Damos turno al siguiente jugador
-        partida.turno();
-        // El programa escoge la casilla donde va a dibujar y dibuja
-        casillaTocada = partida.ia();
+            // Comprobamos que no haya victoria o empate. En caso negativo, damos turno al siguiente jugador
+        int resultado = partida.turno();
 
-        // Comprobamos que la casilla no sea la misma que hemos tocado nosotros. En caso que sea la misma, que seleccione otra.
-        /************************** A MEJORAR************************************/
-        while(!partida.comprobarCasilla(casillaTocada)){
-            casillaTocada = partida.ia();
+        if(resultado > 0){
+            termina(resultado);
+            return;
         }
 
-        marcarCasilla(casillaTocada);
-            // Volvemos a dar turno al otro jugador
-        partida.turno();
+
+        // El programa escoge la casilla donde va a dibujar y dibuja
+        if (jugadores==1) {
+            casillaTocada = partida.ia();
+
+
+            // Comprobamos que la casilla no sea la misma que hemos tocado nosotros. En caso que sea la misma, que seleccione otra.
+            /************************** A MEJORAR************************************/
+            while (!partida.comprobarCasilla(casillaTocada)) {
+                casillaTocada = partida.ia();
+            }
+
+            marcarCasilla(casillaTocada);
+            // Comprobamos de nuevo que no haya victoria o empate. En caso negativo, damos turno al siguiente jugador
+            resultado = partida.turno();
+            if (resultado > 0) {
+                termina(resultado);
+            }
+        }
     }
 
     private void marcarCasilla(int casillaNum){
@@ -129,7 +140,29 @@ public class MainActivity extends Activity {
             imagen.setImageResource(R.drawable.aspa);
         }
 
+    }
 
+    private void termina (int resultado){
+        String mensaje;
+
+        if(resultado == 1){
+            mensaje = "¡Ganan los círculos!";
+        }else if (resultado == 2){
+            mensaje = "¡Ganan las aspas!";
+        }else {
+            mensaje = "¡Empate!";
+        }
+
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+
+        // Terminamos el juego
+
+        partida = null;
+        ((Button) findViewById(R.id.unJugador)).setEnabled(true);
+        ((Button) findViewById(R.id.dosJugadores)).setEnabled(true);
+        ((RadioGroup) findViewById(R.id.configDificultad)).setAlpha(1);
 
     }
 

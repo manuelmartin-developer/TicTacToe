@@ -38,11 +38,12 @@
             android:text="@string/facil"
             style="@style/radio"
             />
+
             <RadioButton
                 android:id="@+id/normal"
-                android:text="@string/normal"
                 style="@style/radio"
-                />
+                android:checked="true"
+                android:text="@string/normal" />
             <RadioButton
                 android:id="@+id/imposible"
                 android:text="@string/Imposible"
