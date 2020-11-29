@@ -41,12 +41,15 @@ public class MainActivity extends Activity {
     // Método aJugar que se inicia al pulsar en cualquier botón
 
     public void aJugar(View view){
+
         ImageView imagen;
+
         // Reseteamos las casillas para ponerlas todas en blanco
         for (int cadaCasilla:casilla){
             imagen =  findViewById(cadaCasilla);
             imagen.setImageResource(R.drawable.casilla);
         }
+
         // Identificamos el tipo de juego; 1 ó 2 jugadores
         jugadores = 1;
         if(view.getId()== R.id.dosJugadores){
@@ -61,7 +64,7 @@ public class MainActivity extends Activity {
             idDificultad=0;
         }else if (idDificultad == R.id.normal){
             idDificultad=1;
-        }else if (idDificultad == R.id.imposible){
+        }else if (idDificultad == R.id.dificil){
             idDificultad=2;
         }
 
@@ -76,11 +79,15 @@ public class MainActivity extends Activity {
         configDifi.setAlpha(0);
     }
 
+
+    // Método toque que se encarga de las acciones cuando tocamos sobre unas de las casillas del tablero
     public void toque(View view){
-        // Comprobamos que se haya iniciado la partida, en casp contrario se saldrá del método
+
+        // Comprobamos que se haya iniciado la partida, en caso contrario se saldrá del método
         if (partida==null){
             return;
         }
+
         // Definimos que casilla ha sido pulsada
         int casillaTocada = 0;
 
@@ -90,10 +97,7 @@ public class MainActivity extends Activity {
                 break;
             }
         }
-        /* Mostrabamos un mensaje de ejemplo para saber que casilla se ha pulsado
-        Toast toast = Toast.makeText(this, "Has pulsado la casilla " + casillaTocada, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0,0);
-        toast.show();*/
+
         // Pulsamos una casilla y la dibuja con un círculo
         if (!partida.comprobarCasilla(casillaTocada)){
             // Con return saldremos del método y no se ejecutarán las siguiente líneas del método.
@@ -109,18 +113,18 @@ public class MainActivity extends Activity {
         }
 
 
-        // El programa escoge la casilla donde va a dibujar y dibuja
+        // El programa escoge la casilla donde va a dibujar y dibuja.
         if (jugadores==1) {
             casillaTocada = partida.ia();
 
 
             // Comprobamos que la casilla no sea la misma que hemos tocado nosotros. En caso que sea la misma, que seleccione otra.
-            /************************** A MEJORAR************************************/
+
             while (!partida.comprobarCasilla(casillaTocada)) {
                 casillaTocada = partida.ia();
             }
-
             marcarCasilla(casillaTocada);
+
             // Comprobamos de nuevo que no haya victoria o empate. En caso negativo, damos turno al siguiente jugador
             resultado = partida.turno();
             if (resultado > 0) {
@@ -128,7 +132,7 @@ public class MainActivity extends Activity {
             }
         }
     }
-
+    // Método que se encarga de definir el tipo de objeto a dibujar según el turno.
     private void marcarCasilla(int casillaNum){
 
         // Comprobamos de que jugador es el turno para poner un círculo o un aspa
@@ -141,7 +145,7 @@ public class MainActivity extends Activity {
         }
 
     }
-
+    // Método que se encarga de definir el mensaje de finalización de partida y lo muestra.
     private void termina (int resultado){
         String mensaje;
 
@@ -157,7 +161,7 @@ public class MainActivity extends Activity {
         toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
 
-        // Terminamos el juego
+        // Terminamos el juego y habilitamos de nuevo los botones.
 
         partida = null;
         ((Button) findViewById(R.id.unJugador)).setEnabled(true);

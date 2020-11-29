@@ -5,9 +5,12 @@
     <string name="dos_jugadores">2 jugadores</string>
     <string name="facil">Fácil</string>
     <string name="normal">Normal</string>
-    <string name="Imposible">Imposible</string>
+    <string name="dificil">Difícil</string>
     <string name="casilla">Casilla</string>
     <string name="circulos_ganan">! Círculos ganan !</string>
     <string name="cruces_ganas">! Cruces ganan !</string>
     <string name="empate">! Empate !</string>
+    <string name="vacio">vacio</string>
+    <string name="circulo">círculo</string>
+    <string name="aspa">aspa</string>
 </resources>

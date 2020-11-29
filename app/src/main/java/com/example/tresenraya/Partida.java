@@ -24,6 +24,7 @@ public class Partida {
         }
     }
 
+        // Método que comprueba si la casilla ya ha sido selecionada por algún jugador.
     public Boolean comprobarCasilla(int casilla){
         if (casillas[casilla] != 0){
            return false;
@@ -32,31 +33,31 @@ public class Partida {
         }
         return true;
     }
-
+    // Método que comprueba la posibilidad de ejecutar 3 en raya para el siguiente movimiento.
     public int dosEnRaya(int jugador_en_turno){
         int casilla = -1;
         int cuantas_lleva = 0;
 
-        for (int i=0;i<COMBINACIONES.length;i++){
-            for(int pos:COMBINACIONES[i]){
+        for (int[] combinacione : COMBINACIONES) {
+            for (int pos : combinacione) {
 
-                if(casillas[pos] == jugador_en_turno){
+                if (casillas[pos] == jugador_en_turno) {
                     cuantas_lleva++;
                 }
 
-                if(casillas[pos] == 0){
-                    casilla=pos;
+                if (casillas[pos] == 0) {
+                    casilla = pos;
                 }
 
-                }
-            if(cuantas_lleva == 2 && casilla!=-1){
+            }
+            if (cuantas_lleva == 2 && casilla != -1) {
                 return casilla;
             }
 
             // Reseteamos la variable
-            casilla=-1;
-            cuantas_lleva=0;
-                }
+            casilla = -1;
+            cuantas_lleva = 0;
+        }
         return -1;
         }
 
@@ -78,7 +79,7 @@ public class Partida {
             if (casilla != -1) return casilla;
         }
 
-        // Nivel imposible. Marcará una esquina, si no hay posibilidad que el jugador 1 haga 3 en raya. De este modo, es imposible ganar
+        // Nivel difícil. Marcará una esquina, si no hay posibilidad que el jugador 1 haga 3 en raya. De este modo, es más difícil conseguir una victoria.
 
         if(dificultad == 2){
             if(casillas[0]==0)return 0;
@@ -88,38 +89,43 @@ public class Partida {
 
 
         }
+
+        // Generamos una casilla aleatoria
         Random casilla_aleatoria = new Random();
         casilla = casilla_aleatoria.nextInt(9);
 
         return casilla;
     }
 
+    // Método que se encarga de comprobar el estado de la partida.
     public int turno(){
 
-        Boolean empate = true;
+        boolean empate = true;
 
-        Boolean ultimoMoviviento = true;
+        boolean ultimoMoviviento = true;
 
         // Comprobaremos, antes de cambiar el turno, el estado de la partida:
         // 0 => todavía en juego
         // 1 => ganan los circulos
         // 2 => ganas las aspas
         // 3 => empate
-        for (int i=0;i<COMBINACIONES.length;i++){
-            for(int pos:COMBINACIONES[i]){
-            // Comprobamos que aun queden movimientos
+        for (int[] combinacione : COMBINACIONES) {
+            for (int pos : combinacione) {
 
-                if(casillas[pos] != jugador){
+                // Comprobamos que aun queden movimientos
+
+                if (casillas[pos] != jugador) {
                     ultimoMoviviento = false;
                 }
-            // Si hay algún elemento en su estado inicial es que no ha sido marcado, por lo que no podrá haber empate.
-                if (casillas[pos] == 0){
-                    empate=false;
+                // Si hay algún elemento en su estado inicial es que no ha sido marcado, por lo que no podrá haber empate.
+                if (casillas[pos] == 0) {
+                    empate = false;
                 }
-            } // Cierre del for anidado
+            }
+
             if (ultimoMoviviento) return jugador;
-            ultimoMoviviento=true;
-        } // Cierre del for principal
+            ultimoMoviviento = true;
+        }
         // Si se ha empatado, devolvemos un 3
         if(empate){
             return 3;
