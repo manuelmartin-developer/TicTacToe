@@ -81,7 +81,8 @@ public class Partida {
         // Nivel difícil. Marcará una esquina, si no hay posibilidad que el jugador 1 haga 3 en raya. De este modo, es más difícil conseguir una victoria.
 
         if(dificultad == 2){
-            if(casillas[0]==0)return 0;
+
+            if(casillas[0]==0) return 0;
             if(casillas[2]==0) return 2;
             if(casillas[6]==0) return 6;
             if(casillas[8]==0) return 8;
