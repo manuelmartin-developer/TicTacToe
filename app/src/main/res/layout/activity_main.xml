@@ -1,43 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
-    android:padding="@dimen/padding_pantalla"
     android:weightSum="1"
-    android:orientation="horizontal"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <Space
+        android:id="@+id/space3"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toStartOf="@+id/gridLayout"
+        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
+
+    <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"/>
+        android:layout_marginTop="23dp"
+        android:columnCount="3"
+        android:rowCount="3"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/a1"
+            style="@style/casilla"
+            android:contentDescription="@string/vacio" />
+
+        <ImageView
+            android:id="@+id/a2"
+            style="@style/casilla"
+            android:contentDescription="@string/circulo"
+            android:src="@drawable/circulo" />
+
+        <ImageView
+            android:id="@+id/a3"
+            style="@style/casilla"
+            android:contentDescription="@string/vacio" />
+
+        <ImageView
+            android:id="@+id/b1"
+            style="@style/casilla"
+            android:contentDescription="@string/circulo"
+            android:src="@drawable/circulo" />
+
+        <ImageView
+            android:id="@+id/b2"
+            style="@style/casilla"
+            android:contentDescription="@string/aspa"
+            android:src="@drawable/aspa" />
+
+        <ImageView
+            android:id="@+id/b3"
+            style="@style/casilla"
+            android:contentDescription="@string/circulo"
+            android:src="@drawable/circulo" />
+
+        <ImageView
+            android:id="@+id/c1"
+            style="@style/casilla"
+            android:contentDescription="@string/vacio" />
+
+        <ImageView
+            android:id="@+id/c2"
+            style="@style/casilla"
+            android:contentDescription="@string/circulo"
+            android:src="@drawable/circulo" />
+
+        <ImageView
+            android:id="@+id/c3"
+            style="@style/casilla"
+            android:contentDescription="@string/vacio" />
+
+    </GridLayout>
+
+    <Space
+        android:id="@+id/space4"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toStartOf="@+id/gridLayout"
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout">
 
         <TextView
             style="@style/titulo"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name" />
+
         <Button
             android:id="@+id/unJugador"
+            style="@style/boton"
             android:background="@drawable/boton"
-            android:text="@string/un_jugador"
-            style="@style/boton"/>
+            android:text="@string/un_jugador" />
+
         <RadioGroup
             android:id="@+id/configDificultad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <RadioButton
-            android:id="@+id/facil"
-            android:text="@string/facil"
-            style="@style/radio"
-            />
+                android:id="@+id/facil"
+                style="@style/radio"
+                android:text="@string/facil" />
 
             <RadioButton
                 android:id="@+id/normal"
@@ -53,67 +137,10 @@
 
         <Button
             android:id="@+id/dosJugadores"
+            style="@style/boton"
             android:background="@drawable/boton"
-            android:text="@string/dos_jugadores"
-            style="@style/boton"/>
+            android:text="@string/dos_jugadores" />
     </LinearLayout>
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.3"/>
 
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:columnCount="3"
-        android:rowCount="3">
-        <ImageView
-            android:id="@+id/a1"
-            style="@style/casilla"
-            android:contentDescription="@string/vacio" />
-        <ImageView
-            android:id="@+id/a2"
-            android:src="@drawable/circulo"
-            style="@style/casilla"
-            android:contentDescription="@string/circulo" />
-        <ImageView
-            android:id="@+id/a3"
-            style="@style/casilla"
-            android:contentDescription="@string/vacio" />
-        <ImageView
-            android:id="@+id/b1"
-            android:src="@drawable/circulo"
-            style="@style/casilla"
-            android:contentDescription="@string/circulo" />
-        <ImageView
-            android:id="@+id/b2"
-            android:src="@drawable/aspa"
-            style="@style/casilla"
-            android:contentDescription="@string/aspa" />
-        <ImageView
-            android:id="@+id/b3"
-            android:src="@drawable/circulo"
-            style="@style/casilla"
-            android:contentDescription="@string/circulo" />
-        <ImageView
-            android:id="@+id/c1"
-            style="@style/casilla"
-            android:contentDescription="@string/vacio" />
-        <ImageView
-            android:id="@+id/c2"
-            android:src="@drawable/circulo"
-            style="@style/casilla"
-            android:contentDescription="@string/circulo" />
-        <ImageView
-            android:id="@+id/c3"
-            style="@style/casilla"
-            android:contentDescription="@string/vacio" />
-
-    </GridLayout>
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,8 +60,7 @@ public class Partida {
         }
         return -1;
         }
-
-
+        
 
     // Método que genera un número de casilla (0 al 8) aleatorio y devuelve el numero de casilla
     public int ia (){
